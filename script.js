@@ -1,5 +1,10 @@
+//  ON DEMARRE JQUERY  //
 
-//RECUPERER LA CARTE DE CAHORS
+$(function(){
+
+
+
+//  RECUPERER LA CARTE DE CAHORS  //
 
 var map = L.map('mapid', { zoomControl: false }).setView([44.4475229, 1.441989], 13);
 
@@ -12,19 +17,27 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 
-//ON PARSE LE FICHIER JSON EN JAVA SCRIPT
+//  ON PARSE LE FICHIER JSON EN JAVA SCRIPT  //
 
 $.getJSON('places.json', function(cats) {    
 
 	for (var i = 0; i < cats.length; i++)
 	{
-		console.log(cats[i].name);
+		// console.log(cats[i].name);
+	$(".sidebar-brand").append($("<ul>" + cats[i].name + "</ul>"));
+
+	
 
 
 		var children = cats[i].children;
 
 		for (var j = 0; j < children.length; j++) 
 		{
+
+		$(".sidebar-brand").append($("<li>" + children[j].name + "</li>"));
+
+
+
 
 
 			var places = children[j].places;
@@ -33,25 +46,28 @@ $.getJSON('places.json', function(cats) {
 			{
 				// console.log(places[k].lat);
 				// console.log(places[k].lon);
+				console.log(places[k].name);
 
 				L.marker([places[k].lat, places[k].lon])
 				.bindPopup('<h3>' + places[k].name + '</h3> <p>' + places[k].description + '</p>')
 				.addTo(map);
-			}
 
-		var menu = children[j];
-		document.getElementByTagName('sidebar-brand').innerHTML = menu;	
-		}		
+				 $('.sidebar-brand').append($("<li>" + places[k].name + "</li>"));
+
+
+
+
+			}
+	
+		}	
 	}
+
+			  $('.content').append($("<li>" + places[k].name + "</li>"));	
 
 });
 
-
-
-
-
-
-//SCRIPT POUR LE MENU TOGGLE
+		
+//  FONCTION POUR LE MENU TOGGLE  //
 
 $("#menu-toggle").click(function(e)
 {
@@ -60,8 +76,54 @@ $("#menu-toggle").click(function(e)
 });
 
 
-//FERMETURE DU MENU TOGGLE
 
-$('#sidebar-wrapper a').on("click", function(){
-	$('#sidebar-wrapper').collapse('hide');
+//  FONCTION QUI CACHE LES SOUS CATÉGORIES À L'OUVERTURE DU MENU TOGGLE  //
+
+$('#menu-toggle').click(function(){
+			$('.sidebar-brand li').hide()
+   });
+
+
+
+// $('#menu-toggle').click(function(){
+// 	$('.content li').hide()
+// });
+
+
+
+
+
+
+
+//  FONCTION QUI AFFICHE LES SOUS CATÉGORIE AU CLICK DE LA CATÉGORIE  //
+
+$('.sidebar-brand').click(function(){
+	$('.sidebar-brand li').show(100)
+	$('.sidebar-brand li').show('show');
+
 });
+  
+
+
+// $('.content').click(function(){
+// 	$('.content li').show(100)
+// 	$('.content li').show('show');
+// });
+
+
+
+
+
+
+
+//  FONCTION QUI CACHE LES SOUS CATÉGORIES  //
+
+$('.sidebar-brand').click(function(){	
+		$('.sidebar-brand li').hide()
+		$('sidebar-brand li').hide('slow');	
+});
+
+
+
+
+})

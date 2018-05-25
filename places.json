@@ -153,26 +153,26 @@
     "children": [
       {
         "id": "5b04010b1eb6122e46f8a904",
-        "name": "Récup verre",
+        "name": "Récup verre num 1",
         "icon": "verre.svg",
         "places": [
           {
             "id": "5b04010b8e2fb0010ccdf11e",
-            "name": "Récup verre",
+            "name": "Récup verre num 2",
             "lat": 44.4535718,
             "lon": 1.4325743,
             "description": ""
           },
           {
             "id": "5b04010b68c83070b5737b2c",
-            "name": "Récup verre",
+            "name": "Récup verre num 3",
             "lat": 44.4512138,
             "lon": 1.4337723,
             "description": ""
           },
           {
             "id": "5b04010b0a71dec7f2b1c20f",
-            "name": "Récup verre",
+            "name": "Récup verre num 4",
             "lat": 44.4487548,
             "lon": 1.4345663,
             "description": ""
