@@ -1,0 +1,4 @@
+#mapid { height: 680px; }
+.leaflet-control-zoom leaflet-bar leaflet-control {
+	margin-left: 999px;
+}
