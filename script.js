@@ -27,27 +27,56 @@ map.on('click', onMapClick);
 
 $.getJSON('places.json', function(cats) {
     for (var i = 0; i < cats.length; i++) {
-        $(".sidebar-nav").append($("<li>" + cats[i].name + "</li>"));
+        $(".sidebar-nav").attr('id', 'one').append($("<ul>" + cats[i].name + "</li>"));
         var children = cats[i].children;
 
         for (var j = 0; j < children.length; j++) {
-            $(".sidebar-nav").append($("<li>" + children[j].name + "</li>"));
+            $(".sidebar-nav").attr('id', 'two').append($("<li>" + children[j].name + "</li>"));
             var places = children[j].places;
 
             for (var k = 0; k < places.length; k++) {
-                var name = places[k].name;
+                $(".sidebar-nav").attr('id', 'three').append($("<li>" + places[k].name + "</li>"));
                 //console.log(places[k].lat);
                 //console.log(places[k].lon);
                 //console.log(places[j].name);
                 //console.log(cats[i].name);
-                console.log(places[k].name);
-
+                //console.log(places[k].name);
 
                 // L.marker([places[k].lat, places[k].lon])
                 //     .bindPopup(places[k].name)
                 //     .addTo(map);
             }
+        };
+
+        function hasClass(elem, className) {
+            return elem.className.split(' ').indexOf(className) > -1;
         }
+
+        document.addEventListener('click', function(e) {
+            if (hasClass(e.target, 'three')) {
+                var marker = $.getJSON("places.json", function(cats) {
+                    for (var i = 0; i < cats.length; i++) {
+                        var children = cats[i].children;
+
+                        for (var j = 0; j < children.length; j++) {
+
+                            var places = children[j].places;
+
+                            for (var k = 0; k < places.length; k++) {
+
+                                L.marker([places[k].lat, places[k].lon])
+                                    .bindPopup(places[k].name)
+                                    .addTo(map);
+
+                            }
+                        }
+                    }
+                });
+            } else if (hasClass(e.target, 'test')) {
+                // .test clicked
+                // Do your other thing
+            }
+        }, false);
 
 
     }
@@ -64,24 +93,24 @@ function marker() {
 
                 for (var k = 0; k < places.length; k++) {
 
-                    //console.log(places[k].lat);
-                    //console.log(places[k].lon);
-                    //console.log(places[j].name);
-                    console.log("success");
-
-
-
-
-
                     L.marker([places[k].lat, places[k].lon])
                         .bindPopup(places[k].name)
                         .addTo(map);
 
                 }
             }
-
-
         }
     });
 
 }
+// $.getJSON( "places.json", function( data ) {
+//   var items = [];
+//   $.each( data, function( key, val ) {
+//     items.push( "<li id='" + key + "'>" + val + "</li>" );
+//   });
+
+//   $( "<ul/>", {
+//     "class": "my-new-list",
+//     html: items.join( "" )
+//   }).appendTo( "body" );
+// });

@@ -1,4 +1,7 @@
-#mapid { height: 680px; }
+#mapid { height: 800px; width: 800px}
 .leaflet-control-zoom leaflet-bar leaflet-control {
 	margin-left: 999px;
+	
+ul {
+	font-weight: bold;
 }
